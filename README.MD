@@ -14,7 +14,7 @@ docker pull dikshyant180/dq-check-fastapi
 docker run -d -p 5000:5000 dikshyant180/dq-check-fastapi 
 ```
 
-## Now the api becomes acessible at localhost:5000
+### Now the api becomes acessible at localhost:5000
 
 In cmd, provide directory of the csv dataset to file variable.
 
