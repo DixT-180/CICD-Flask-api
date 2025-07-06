@@ -28,5 +28,6 @@ def check_data():
     return jsonify(report)
 
 
-if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+if __name__ == '__main__': 
+    app.run(host="0.0.0.0", port=5000)   #make the container acessible from outside the docker.
+# Tells Flask to listen on all available network interfaces, not just localhost(its internal host)
