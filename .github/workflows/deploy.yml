@@ -28,4 +28,4 @@ jobs:
           context: .
           file: ./DockerFile
           push: true
-          tags: dikshyant180/dqrepodikshyant
+          tags: dikshyant180/dq-check-fastapi
