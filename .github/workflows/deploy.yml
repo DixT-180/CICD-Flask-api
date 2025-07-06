@@ -25,6 +25,7 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v5
         with:
-          context: ./DockerFile
+          context: .
+          file: ./DockerFile
           push: true
           tags: dikshyant/titanic-dq-api:latest 
