@@ -28,4 +28,4 @@ jobs:
           context: .
           file: ./DockerFile
           push: true
-          tags: dikshyant/titanic-dq-api:latest 
+          tags: dikshyant180/dqrepodikshyant
