@@ -16,7 +16,7 @@ docker run -d -p 5000:5000 dikshyant180/dq-check-fastapi
 
 ## Now the api becomes acessible at localhost:5000
 
-In cmd, TYPE following command
+In cmd, provide directory of the csv dataset to file variable.
 
 ```bash
 curl -X POST -F "file=@\"C:\\Users\\Dikshyant\\Desktop\\github_action_docker\\tested.csv\"" http://localhost:5000/check
