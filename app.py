@@ -24,8 +24,9 @@ def check_data():
         "missing_values": df.isnull().sum().to_dict(),
         "duplicate_rows": int(df.duplicated().sum())
     }
-
+    print(report)
     return jsonify(report)
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)
