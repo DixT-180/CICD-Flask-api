@@ -1,7 +1,8 @@
 # Built with Docker and auto-published to Docker Hub via GitHub Actions CI/CD.
 
+## After publishing to docker-hub!
 
-## To run the image as container after deploying to dockerhub,
+## Pull the image
 
 ```bash
 docker pull dikshyant180/dq-check-fastapi
