@@ -45,12 +45,12 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            echo "Cleaning up Docker containers"
-            sh "docker rm -f $CONTAINER_NAME || true"
-        }
-    }
+    // post {
+    //     always {
+    //         echo "Cleaning up Docker containers"
+    //         sh "docker rm -f $CONTAINER_NAME || true"
+    //     }
+    // }
 }
 // pipeline {
 //     agent any
