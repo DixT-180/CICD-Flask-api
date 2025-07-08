@@ -5,7 +5,6 @@ pipeline {
         IMAGE_NAME = 'titanic-data-quality-api'
         CONTAINER_NAME = 'titanic-api-container'
         PORT = '5000'
-        NETWORK_NAME = 'test-net'
     }
 
     stages {
@@ -18,16 +17,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh "docker build -t $IMAGE_NAME -f Dockerfile ."
-                }
-            }
-        }
-
-        stage('Create Network') {
-            steps {
-                script {
-                    // Create network if not exists
-                    sh "docker network inspect $NETWORK_NAME >/dev/null 2>&1 || docker network create $NETWORK_NAME"
+                    sh "docker build -t $IMAGE_NAME -f DockerFile ."
                 }
             }
         }
@@ -35,9 +25,10 @@ pipeline {
         stage('Run Container') {
             steps {
                 script {
+                    // Stop and remove if already running
                     sh """
-                        "docker rm -f $CONTAINER_NAME || true"
-                        docker run -d --name $CONTAINER_NAME --network $NETWORK_NAME -p $PORT:5000 $IMAGE_NAME
+                    docker rm -f $CONTAINER_NAME || true
+                    docker run -d --name $CONTAINER_NAME --network test-net -p $PORT:5000 $IMAGE_NAME
                     """
                 }
             }
@@ -46,8 +37,10 @@ pipeline {
         stage('Verify API Running') {
             steps {
                 script {
+                    sh "docker network create test-net || true"
+                    sh "docker network connect test-net $CONTAINER_NAME"
                     sh """
-                        docker run --rm --network $NETWORK_NAME curlimages/curl:7.87.0 curl http://$CONTAINER_NAME:5000
+                    docker run --rm --network test-net curlimages/curl:7.87.0 curl http://$CONTAINER_NAME:5000
                     """
                 }
             }
@@ -56,7 +49,7 @@ pipeline {
 
     post {
         always {
-            echo "Cleaning up Docker container"
+            echo "Cleaning up Docker containers"
             sh "docker rm -f $CONTAINER_NAME || true"
         }
     }
