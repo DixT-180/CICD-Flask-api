@@ -73,6 +73,7 @@ pipeline {
             steps {
                 script {
                     sh "docker build -t $IMAGE_NAME -f DockerFile ."
+                    sh "ip addr"
                 }
             }
         }
