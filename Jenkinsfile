@@ -36,7 +36,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                        docker rm -f $CONTAINER_NAME || true
+                        "docker rm -f $CONTAINER_NAME || true"
                         docker run -d --name $CONTAINER_NAME --network $NETWORK_NAME -p $PORT:5000 $IMAGE_NAME
                     """
                 }
