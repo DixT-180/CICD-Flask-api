@@ -83,7 +83,7 @@ pipeline {
                 script {
                     sh """
                     docker rm -f $CONTAINER_NAME || true
-                    docker run -d --name $CONTAINER_NAME --network cicd-flask-api_jenkins -p $PORT:5000 $IMAGE_NAME
+                
                     """
                 }
             }
