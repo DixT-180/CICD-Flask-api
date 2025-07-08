@@ -52,7 +52,6 @@
 //         }
 //     }
 // }
-
 pipeline {
     agent any
 
@@ -73,7 +72,6 @@ pipeline {
             steps {
                 script {
                     sh "docker build -t $IMAGE_NAME -f DockerFile ."
-                    
                 }
             }
         }
@@ -83,7 +81,7 @@ pipeline {
                 script {
                     sh """
                     docker rm -f $CONTAINER_NAME || true
-                
+                    docker run -d --name $CONTAINER_NAME -p $PORT:5000 $IMAGE_NAME
                     """
                 }
             }
@@ -94,7 +92,7 @@ pipeline {
                 script {
                     sh """
                     for i in {1..5}; do
-                        curl -f http://$CONTAINER_NAME:5000 && exit 0
+                        curl -f http://localhost:$PORT && exit 0
                         echo 'API not ready, retrying...'
                         sleep 5
                     done
