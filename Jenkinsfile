@@ -75,7 +75,7 @@ pipeline {
                 script {
                     // Stop and remove container if already running
                     sh """
-                    if [ \$(docker ps -q -f name=$CONTAINER_NAME) ]; then
+                    if [ \$(docker ps -a -q -f name=$CONTAINER_NAME) ]; then
                         docker stop $CONTAINER_NAME
                         docker rm -f $CONTAINER_NAME
 
